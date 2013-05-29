@@ -1,1 +1,2 @@
-bracU CSE220:Data Structure Lab Solutions(Summer, 2013)
+CSE220:Data Structure Lab
+Brac University, Summer, 2013
