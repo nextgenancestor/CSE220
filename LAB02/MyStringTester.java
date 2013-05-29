@@ -8,12 +8,14 @@ public class MyStringTester {
     MyString m2 = new MyString("Hello World");
     
     
-    System.out.println(m2.length());
-    System.out.println(m2.charAt(1));
-    System.out.println(m2.startsWith("He"));
-    System.out.println(m2.startsWith(m1));
-    System.out.println(m2.endsWith(m1));
-    
+//    System.out.println(m2.length());
+//    System.out.println(m2.charAt(1));
+//    System.out.println(m2.startsWith("He"));
+//    System.out.println(m2.startsWith(m1));
+//    System.out.println(m2.endsWith(m1));
+//    
+    MyString data = m2.replaceFirst('o', '0');
+    System.out.println(data.array);
     
     
     
