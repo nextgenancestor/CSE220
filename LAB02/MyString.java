@@ -379,6 +379,7 @@ int lastIndexOf (String str){
 MyString concot(MyString str){
 
   char[] temp = new char[array.length + str.array.length];
+  
 }
 
 
