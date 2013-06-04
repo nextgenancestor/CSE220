@@ -1,7 +1,6 @@
 public class MyString{
  char[] array;
- //String str;
-
+ 
  MyString(){
  
  }
@@ -115,7 +114,6 @@ public class MyString{
   for(int i = 0; i < newArray.length; i++){
    if (oldChar == newArray[i]) {
     newArray[i] = newChar;
-    break;
    }
   }
   MyString data = new MyString(newArray);
@@ -206,6 +204,7 @@ boolean equalsIgnoreCase (MyString rightString){
   boolean msg = true;
   if(b.array.length != rightString.array.length){
     msg = false;
+    
   }
   if(msg){
     for(int i = 0; i < array.length; i++){
@@ -221,34 +220,43 @@ boolean equalsIgnoreCase (MyString rightString){
 
 int compareTo(String str){
 
-  MyString a = new MyString(str);
-  MyString b = new MyString(array);
-
+  MyString a = new MyString(array);
+  MyString b = new MyString(str);
+  
   int msg = 0;
   for(int i = 0; i < a.length(); i++){
-    if((int)a.array[i] > b.array[i]){
+    if((int)a.array[i] > (int)b.array[i]){
       msg = -1;
       break;
+    } else if((int)a.array[i] == (int)b.array[i]){
+      msg = 0;
+      
     } else {
       msg = 1;
+      break;
     }
   }
   return msg;
 }
 
 int compareToIgnoreCase(MyString str){
-
-  MyString a = str.toLowerCase();
-  MyString b = new MyString(array);
-  b = b.toLowerCase();
-
+  
+  
+  MyString a = new MyString(array);
+  a = a.toLowerCase();
+  MyString b = str.toLowerCase();
+  
   int msg = 0;
   for(int i = 0; i < a.length(); i++){
-    if((int)a.array[i] > b.array[i]){
+    if((int)a.array[i] > (int)b.array[i]){
       msg = -1;
       break;
+    } else if((int)a.array[i] == (int)b.array[i]){
+      msg = 0;
+      
     } else {
       msg = 1;
+      break;
     }
   }
   return msg;
@@ -257,8 +265,8 @@ int compareToIgnoreCase(MyString str){
 
 int compareToIgnoreCase(String str){
 
-  MyString a = new MyString(str);
-  return a.compareToIgnoreCase(a);
+  MyString temp = new MyString(str);
+  return compareToIgnoreCase(temp);
 
 }
 
@@ -376,11 +384,32 @@ int lastIndexOf (String str){
 
 }
 
-MyString concot(MyString str){
+MyString concat(MyString str){
 
   char[] temp = new char[array.length + str.array.length];
+  for(int i = 0; i < array.length; i++){
+    temp[i] = array[i];
+  }
   
+  int j = 0;
+  for(int i = array.length; i < temp.length; i++){
+    temp[i] = str.array[j];
+    j++;
+  }
+  
+  MyString data = new MyString(temp);
+  return data;
 }
 
+MyString concat(char[ ] charSeq){
+  
+  MyString temp = new MyString(charSeq);
+  return concat(temp);
+}
 
+MyString concat(String str){
+  
+  MyString temp = new MyString(str);
+  return concat(temp);
+}
 }
