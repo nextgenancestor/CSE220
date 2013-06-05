@@ -2,12 +2,12 @@ public class MyStringTester {
   public static void main (String [] args) {
     
     
-    MyString m1 = new MyString("Hello World");
-    MyString m2 = new MyString("Aaa");
+    MyString m1 = new MyString("Hello ");
+    char[] k = {'w','o','r','l','d'};
+    MyString m2 = new MyString(k);
     
-    MyString data = m1.substring(3, 8);
-    
-    System.out.println(m1.indexOf('o',5));
+    MyString m3 = m1.concat("Jyoti");
+    System.out.println(m3.array);
     
     
     

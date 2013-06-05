@@ -342,17 +342,18 @@ int indexOf(MyString str){
 
   int msg = -1;
   for(int i = 0; i <= array.length - str.array.length; i++){
-
-    if(array[i] == str.array[i]){
+    
+  
+    if(array[i] == str.array[0]){
       int temp = 0;
       int startPoint = i;
-      for(int j = i; j < i + (str.array.length - 1); i++){
-
+      for(int j = i; j < i + (str.array.length - 1); j++){
         if(array[j] != str.array[temp]){
           break;
-        } else if (j == str.array.length - 1){
+        } else {
           msg = startPoint;
         }
+        temp++;
       }
     }
   }
@@ -360,27 +361,42 @@ int indexOf(MyString str){
   return msg;
 }
 
-int lastIndexOf (String str){
+int indexOf (String str){
+  
+  MyString temp = new MyString(str);
+  return indexOf(temp);
+}
 
+int lastIndexOf (String str){
+  
   MyString temp1 = new MyString(str);
   int msg = -1;
-  for(int i = 0; i <= array.length - temp1.array.length; i++){
-
-    if(array[i] == temp1.array[i]){
-      int temp = 0;
-      int startPoint = i;
-      for(int j = i; j < i + (temp1.array.length - 1); i++){
-
-        if(array[j] != temp1.array[temp]){
-          break;
-        } else if (j == temp1.array.length - 1){
-          msg = startPoint;
+  boolean goOn = true;
+  
+  for(int i = array.length - 1; i >= 0; i--){
+    if (goOn){
+      if(array[i] == temp1.array[temp1.array.length - 1]){
+        int temp = temp1.array.length - 1;
+        int startPoint = i;
+        int j = i;
+        for(int k = 0; k < temp1.array.length; k++){
+          if(array[j] != temp1.array[temp]){
+           
+            goOn = true;
+          } else {
+            msg = startPoint;
+            goOn = false;
+          }
+          j--;
+          temp--;
         }
+        
       }
     }
   }
 
-  return msg;
+
+return (msg - temp1.array.length + 1);
 
 }
 
