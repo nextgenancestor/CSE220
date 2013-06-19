@@ -425,7 +425,9 @@ MyString concat(char[ ] charSeq){
 
 MyString concat(String str){
   
-  MyString temp = new MyString(str);
-  return concat(temp);
+  if(str != null){
+    MyString temp = new MyString(str);
+    return concat(temp);
+  } 
 }
 }

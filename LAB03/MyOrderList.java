@@ -19,44 +19,60 @@ class MyOrderList{
     if(cursor == null){
       cursor = newElement;
       cursor.next = cursor;
+      System.out.println("proccessing first item");
     } else {
       //if only 1 element
+      cursor = gotoBeginning();
       if(cursor.next == cursor){
         cursor.next = newElement;
-        cursor.next.next = cursor;
+        newElement.next = cursor;
+        System.out.println("processing second");
       } else {
-        //if multiple elements!
-        Node h = null;
-        cursor = gotoBeginning();
-        boolean awesome = false;
-        for(h = cursor; h.next != cursor && h.element > newElement.element; h = h.next){
-          System.out.println("ore baba " + h.element + "   " + newElement.element);
-          awesome = true;
-          
-        }
-        if (awesome){
-          Node temp = h.next;
-          System.out.println("Tempur val " + temp.element);
-          h.next = newElement;
-          h.next.next = temp;
-        } else {
-          cursor = gotoEnd();
+        System.out.println("processing other items");
+        cursor = gotoEnd();
+        System.out.println("last item: " + cursor.element);
+        if(cursor.element < newElement.element){
+          System.out.println("I am here");
+          Node q = cursor.next;
           cursor.next = newElement;
-          cursor.next.next = gotoBeginning();
+          newElement.next = q;
+        } else {
+          System.out.println("oi");
+          
+          Node n = cursor = gotoBeginning();
+          
+          for(Node h = cursor; h.next != cursor; h = h.next){
+            if(newElement.element > h.element && newElement.element < h.next.element){
+              
+              Node q = h.next;
+              h.next = newElement;
+              newElement.next = q;
+            }
+          }
         }
         
       }
+      
     }
   }
   
   Node retrieve(int searchKey){
     
-    for(Node h = cursor; h.next != cursor; h = h.next){
+    Node h = cursor;
+    do{
       if(h.element == searchKey){
         cursor = h;
         break;
       }
-    }
+      h = h.next;
+    } while (h != cursor);
+    
+//    for(Node h = cursor; h.next != cursor; h = h.next){
+//      if(h.element == searchKey){
+//        cursor = h;
+//        break;
+//      }
+//    }
     
     return cursor;
   }
@@ -101,25 +117,53 @@ class MyOrderList{
   
   Node gotoBeginning(){
     
-    Node head = cursor;
-    for(Node h = cursor; h.next != cursor; h = h.next){
-      if(head.element > h.element){
-        head = h;
-      }
-    }
+        Node tail = cursor;
+    Node h = cursor;
+//    for(Node h = cursor; h.next != cursor; h = h.next){
+//      if(tail.element < h.element){
+//        tail = h;
+//      }
+//    }
     
-    cursor = head;
+    do{
+        if(tail.element > h.element){
+          tail = h;
+        }
+        h =  h.next;
+      } while (h != cursor);
+    
+    cursor = tail;
     return cursor;
+    
+    
+    
+//    Node head = cursor;
+//    for(Node h = cursor; h.next != cursor; h = h.next){
+//      if(head.element > h.element){
+//        head = h;
+//      }
+//    }
+//    
+//    cursor = head;
+//    return cursor;
   }
   
   Node gotoEnd(){
     
     Node tail = cursor;
-    for(Node h = cursor; h.next != cursor; h = h.next){
-      if(tail.element < h.element){
-        tail = h;
-      }
-    }
+    Node h = cursor;
+//    for(Node h = cursor; h.next != cursor; h = h.next){
+//      if(tail.element < h.element){
+//        tail = h;
+//      }
+//    }
+    
+    do{
+        if(tail.element < h.element){
+          tail = h;
+        }
+        h =  h.next;
+      } while (h != cursor);
     
     cursor = tail;
     return cursor;
@@ -153,17 +197,12 @@ class MyOrderList{
     } else {
       cursor = gotoBeginning();
       Node h = cursor;
-      System.out.println("shuru");
-      System.out.println(h.element);
-      System.out.println(h.next.element);
-      System.out.println(h.next.next.element);
-      System.out.println(h.next.next.next.element);
-      //System.out.println(h.next.next.next.element);
+
       
-//   for(h = cursor; h.next != cursor; h = h.next){
-//
-//    System.out.println(h.element);
-//   }
+      do{
+        System.out.println(h.element);
+        h = h.next;
+      } while (h != cursor);
     }
   }
 }
