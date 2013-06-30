@@ -153,7 +153,15 @@ public class ArrayList implements List {
     //    all subsequent elements to the right by one position
     // 4. put the new element in the hole
     // 5. update size
-    
+    if(index > size) {
+      Object[] temp = new Object[data.length * 2];
+      for(int count = 0; count < data.length; count++){
+        temp[count] = data[count];
+      }
+      size++;
+      data = temp;
+      temp = null;
+    }
   }
   
   /**
@@ -298,6 +306,18 @@ public class ArrayList implements List {
     // 2. Shift the elements k positions to the right
     // 3. Put nulls in the first k positions
     // 4. Update size to size+k
+    Object[] temp = new Object[data.length + k];
+    for(int count = 0; count < data.length; count++){
+      temp[count] = data[count];
+    }
+    for(int count = temp.length - 1; count > k - 1; count--){
+      //System.out.println("Replacing " + temp[count] + " with " + (count - k));
+      temp[count] = temp[count - k];
+      temp[count - k] = null;
+    }
+    
+    data = temp;
+    size = size + k;
   }
   
   /**
@@ -420,7 +440,7 @@ public class ArrayList implements List {
       System.out.println(i);
     }
   }
-      
+  
   
   /**
    * Tests this ArrayList class.
@@ -519,4 +539,4 @@ public class ArrayList implements List {
     b.shiftLeft(4);
     System.out.println("shiftLeft(b, 4) = " + b);
   }
-}
+  }

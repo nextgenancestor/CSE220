@@ -8,8 +8,7 @@ public class test{
     list.add("gadha");
     list.add("kukur");
     System.out.println(list.size());
-    
-    list.shiftLeft(2);
+    list.shiftRight(2);
     list.print();
   }
 }
