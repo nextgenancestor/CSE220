@@ -1,7 +1,6 @@
 /**
  * ArrayList.java
  */
-
 /**
  * Implementation of a List using a built-in array. When the array
  * container becomes full, it's automatically resized to have double the
@@ -154,14 +153,17 @@ public class ArrayList implements List {
     // 4. put the new element in the hole
     // 5. update size
     if(index > size) {
-      Object[] temp = new Object[data.length * 2];
-      for(int count = 0; count < data.length; count++){
-        temp[count] = data[count];
+      throw new IndexOutOfBoundsException();
+    } else {
+      
+      index--;
+      for(int count = data.length - 1; count > index; count--){
+        data[count] = data[count-1];
       }
+      data[index] = e;
       size++;
-      data = temp;
-      temp = null;
     }
+    
   }
   
   /**
@@ -194,6 +196,10 @@ public class ArrayList implements List {
     // Basically, you'll use the specified list's toArray method
     // to get the elements in an array, and then iterate over the 
     // array, appending each to this list using the add(e) method
+    for(int count = 0; count < s.size(); count++){
+      this.add(s.get(count));
+    }
+    
   }
   
   /**
@@ -212,7 +218,17 @@ public class ArrayList implements List {
     //    by one position.
     // 4. Set the last position to null to help GC
     // 5. Decrement size, and return the saved reference
-    return null;   // TODO: REMOVE THIS LINE!
+    if(index > size){
+      throw new IndexOutOfBoundsException();
+    } else {
+      Object e = this.get(index);
+      for(int count = index; count < data.length - 2; count++){
+        data[count] = data[count+1];
+      }
+      data[data.length - 1] = null;
+      size--;
+      return e;
+    }   // TODO: REMOVE THIS LINE!
   }
   
   /**
@@ -229,7 +245,14 @@ public class ArrayList implements List {
     // and then remove it using remove(index) method. Of course, 
     // the element may not exist in this list, and which case, 
     // we simply return false.
-    return false;   // TODO: REMOVE THIS LINE!
+    boolean found = false;
+    for(int count = 0; count < size; count++){
+      if(data[count] == e){
+        this.remove(count);
+        found = true;
+      }
+    }
+    return found;   // TODO: REMOVE THIS LINE!
   }
   
   /**
@@ -242,6 +265,10 @@ public class ArrayList implements List {
     // garbage collector, and then set the size to 0. Note that we
     // leave the actual array storage alone since it may be used again
     // in the future.
+    for(int count = 0; count < size; count++){
+      data[count] = null;
+    }
+    size = 0;
   }
   
   /**
@@ -256,7 +283,12 @@ public class ArrayList implements List {
     // TODO
     // 1. Check to see if index is within bounds, or throw exception
     // 2. Return the element at that index
-    return null;   // TODO: REMOVE THIS LINE!
+    if(index > size){
+      throw new IndexOutOfBoundsException();
+    } else{
+      return data[index];
+    }
+       // TODO: REMOVE THIS LINE!
   }
   
   /**
@@ -277,7 +309,13 @@ public class ArrayList implements List {
     // 2. Save a reference to the element currently at that index
     // 3. Set the reference at that index to specified element
     // 4. Return the saved reference
-    return null;   // TODO: REMOVE THIS LINE!
+    if(index > size){
+      throw new IndexOutOfBoundsException();
+    } else {
+      Object temp = data[index];
+      data[index] = e;
+      return temp;
+    }
   }
   
   /**
@@ -290,6 +328,16 @@ public class ArrayList implements List {
     // 1. Use two indices, i starting at 0 (moving forward), and
     //    j starting at size-1 (moving backwards)
     // 2. Swap the elements until i is larger than j
+    int i = 0;
+    int j = size - 1;
+    while(j > i){
+      Object temp = data[i];
+      data[i] = data[j];
+      data[j] = temp;
+      i++;
+      j--;
+    }
+    
   }
   
   /**
@@ -360,7 +408,9 @@ public class ArrayList implements List {
     // We create a new ArrayList (this will contain the same
     // elements), and use addAll method to all this
     // list's elements to the copy, and return the copy.
-    return null;   // TODO: REMOVE THIS LINE!
+    ArrayList temp = new ArrayList();
+    temp.addAll(this);
+    return temp;   // TODO: REMOVE THIS LINE!
   }
   
   /**
@@ -397,7 +447,27 @@ public class ArrayList implements List {
     // will return an array containing two elements. Create an array
     // of "size" capacity, and iterate over the elements of this 
     // sequence, adding each to the output array.
-    return null;   // TODO: REMOVE THIS LINE!
+    boolean ticker = true;
+    Object[] temp = new Object[size];
+    
+    for(int count = 0; count < size; count++){
+      temp[count] = data[count];
+    }
+    
+    for(int count = 0; count < size - 1; count++){
+      if(temp[count] == "help" && temp[count + 1] == "me"){
+        ticker = false;
+        temp = new Object[2];
+        temp[0] = "help";
+        temp[1] = "me";
+        break;
+      }
+    }
+    if(ticker){
+      return temp;
+    } else{
+      return temp;   // TODO: REMOVE THIS LINE!
+    }
   }
   
   /**
