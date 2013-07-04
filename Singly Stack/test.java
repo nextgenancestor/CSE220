@@ -6,8 +6,11 @@ public class test{
     list.push("Jyoti");
     list.push("Dip");
     list.push("Tonny");
-    list.push("SHuvo");
-    System.out.println(list.remove("SHuvo"));
+    list.push("Munira");
+    list.push("Tasu");
+    
+    System.out.println(list.remove("Dip"));
+    System.out.println(list.moveToTop("Munira"));
     list.print();
     
   }

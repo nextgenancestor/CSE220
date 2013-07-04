@@ -51,6 +51,14 @@ public class myStack{
     return toReturn;
   }
   
+  boolean moveToTop(Object e){
+    boolean toReturn = false;
+    if(this.remove(e)){
+      this.push(e);
+      toReturn = true;
+    } 
+    return toReturn;
+  }
   void print(){
     for(Node n = header; n != null; n = n.next){
       System.out.println(n.element);
