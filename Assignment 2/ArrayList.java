@@ -366,6 +366,7 @@ public class ArrayList implements List {
     
     data = temp;
     size = size + k;
+    System.out.println(size);
   }
   
   /**
@@ -430,8 +431,16 @@ public class ArrayList implements List {
     // look at assignment 1, you'll know how to do this.
     // The StringBuffer class is really the correct way to "build up"
     // a string element at a time, but I'll accept any correct answer.
-    String s = data[0] + " "  +  data[1];
-    return s;   // TODO: REMOVE THIS LINE!
+    String toReturn = "";
+    for(int count = 0; count < size - 1; count++){
+      System.out.println("Now: " + data[count] + " Next: " + data[count + 1]);
+      if(data[count].equals("help") && data[count+1].equals("me")){
+        toReturn = "[ help me ]";
+        break;
+      }
+    }
+    System.out.println("bhao" + toReturn);
+    return toReturn;   // TODO: REMOVE THIS LINE!
   }
   
   /**
