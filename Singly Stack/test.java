@@ -5,7 +5,9 @@ public class test{
     list.push("Aqb");
     list.push("Jyoti");
     list.push("Dip");
-    System.out.println(list.remove("Jyoti"));
+    list.push("Tonny");
+    list.push("SHuvo");
+    System.out.println(list.remove("SHuvo"));
     list.print();
     
   }

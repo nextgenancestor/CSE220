@@ -19,20 +19,35 @@ public class myStack{
   
   boolean remove(Object e){
     boolean toReturn = false;
-    Node toDelete = null;
-    
     Node n = null;
+    
+    //Approch 1
     for(n = header; n != null; n = n.next){
-      if(n.next.element.equals(e)){
-         toDelete = n.next;
-         toReturn = true;
-         break;
+      if(n.element.equals(e)){
+        toReturn = true;
+        break;
       }
     }
     
-    n.next = toDelete.next;
-    toDelete = null;
+    boolean notFirst = true;
+    
+    if(e.equals(header.element)){
+      notFirst = false;
+      this.pop();
+    }
       
+    if(toReturn && notFirst){
+      Node prev;
+      for(prev = header; prev.next != n; prev = prev.next){
+       
+      }
+      if(n.next == null){
+        prev.next = null;
+      } else {
+        prev.next = n.next;
+      }
+    }
+    
     return toReturn;
   }
   
