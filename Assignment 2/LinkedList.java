@@ -36,8 +36,7 @@ public class LinkedList implements List {
    */
   @Override
   public int size() {
-    // TODO
-    
+
     return size;   // TODO: REMOVE THIS LINE!
   }
   
@@ -99,7 +98,15 @@ public class LinkedList implements List {
     // Instead of scanning from the front, we scan from the back
     // (thanks to this being a doubly-linked list). Just make sure
     // you return the correct position if found!
-    return -1;   // TODO: REMOVE THIS LINE!
+    int toReturn = -1;
+    int index = 1;
+    for(Node n = header.next; n != header; n = n.next){
+      if(n.element.equals(e)){
+        toReturn = index;
+      }
+      index++;
+    }
+    return toReturn;   // TODO: REMOVE THIS LINE!
   }
   
   /**
@@ -112,7 +119,14 @@ public class LinkedList implements List {
     // TODO
     // Hint: use indexOf to see if the element is in this list or
     // not.
-    return false;   // TODO: REMOVE THIS LINE!
+    boolean toReturn = false;
+    for(Node n = header.next; n != header; n = n.next){
+      if(n.element.equals(e)){
+        toReturn = true;
+        break;
+      }
+    }
+    return toReturn;   // TODO: REMOVE THIS LINE!
   }
   
   /**
@@ -195,6 +209,11 @@ public class LinkedList implements List {
     // 1. Extract the elements of "s" into an array of objects
     // 2. Iterate over the elements in the returned array, adding 
     //    each to the end of this list using it's add() method.
+    Object[] data = s.toArray();
+    for(int count = 0; count < data.length; count++){
+      this.add(data[count]);
+    }
+    
   }
   
   /**
@@ -217,7 +236,7 @@ public class LinkedList implements List {
       throw new IndexOutOfBoundsException();
     } else {
       Node n = header;
-      for(int count = 0; count < size; count++){
+      for(int count = 0; count < index; count++){
         n = n.next;
       }
       temp = n.element;
@@ -359,6 +378,8 @@ public class LinkedList implements List {
     //    and moving backwards)
     // 2. Swap the elements until you have swapped size/2 elements
     Node forward = header.next;
+    //I need to connect the last element, or I just could go to the last
+    //element with a for loop and set it on Backward Node
     Node backward = header.prev;
     
     for(int count = 0; count < size/2; count++){
@@ -384,6 +405,9 @@ public class LinkedList implements List {
     // TODO
     // Add k elements (with null value) to the beginning of this
     // list using one of the add methods.
+    for(int count = 0; count < k; count++){
+      this.add(0, null);
+    }
   }
   
   /**
@@ -398,6 +422,9 @@ public class LinkedList implements List {
   public void shiftLeft(int k) {
     // TODO
     // Remove k elements from the beginning of this list.
+    for(int count = 0; count < k; count++){
+      this.remove(0);
+    }
   }
   
   /**
@@ -413,7 +440,9 @@ public class LinkedList implements List {
     // this list's elements to it, and return the copy. Hint: use 
     // the addAll method of the newly created list, passing "this"
     // as the parameter.
-    return null;   // TODO: REMOVE THIS LINE!
+    LinkedList toReturn = new LinkedList();
+    toReturn.add(this);
+    return toReturn;   // TODO: REMOVE THIS LINE!
   }
   
   /**
@@ -436,7 +465,11 @@ public class LinkedList implements List {
     // look at assignment 1, you'll know how to do this.
     // The StringBuffer class is really the correct way to "build up"
     // a string element at a time, but I'll accept any correct answer.
-    return null;   // TODO: REMOVE THIS LINE!
+    String toReturn = "";
+    for(Node n = header.next; n != header; n = n.next){
+      toReturn += (String)n.element;
+    }
+    return toReturn;   // TODO: REMOVE THIS LINE!
   }
   
   /**
@@ -452,7 +485,14 @@ public class LinkedList implements List {
     // will return an array containing the two elements. Create an 
     // array of "size" capacity, and iterate over the elements of this 
     // list, adding each to the output array.
-    return null;   // TODO: REMOVE THIS LINE!
+    Object[] toArray = new Object[this.size()];
+    int i = 0;
+    
+    for(Node n = header.next; n != header; n = n.next){
+      toArray[i] = n.element;
+      i++;
+    }
+    return toArray;   // TODO: REMOVE THIS LINE!
   }
   
   /**
@@ -471,7 +511,38 @@ public class LinkedList implements List {
     // 4. Now check if all elements of the other list matches this
     //    one: extract the other list's elements using toArray, and
     //    check against this one's.
-    return false;   // TODO: REMOVE THIS LINE!
+    //===
+    if (this == o)
+      return true;
+    else if (o == null || !(o instanceof List))
+      return false;
+    else {
+      // Now we know that the "o" is a reference to some
+      // implementation of List interface, so can cast it to
+      // such, and use the public methods to get the elements.
+      List otherList = (List) o;
+      
+      // If the sizes don't match, the two cannot be equal.
+      if (size != otherList.size())
+        return false;
+      
+      // Get the elements of the other list in an array, and
+      // compare with this list's elements.
+      Object[] otherElements = otherList.toArray();
+      Object[] thisElements = this.toArray();
+//      for (Object e : otherElements)
+//        if (!contains(e))
+//        return false;
+      for(int count = 0; count < size; count++){
+        if(!thisElements[count].equals(otherElements[count])){
+          return false;
+        }
+      }
+      
+      // If we're here, the two must be equal!
+      return true;
+      // TODO: REMOVE THIS LINE!
+    }
   }
   
   public void print(){
